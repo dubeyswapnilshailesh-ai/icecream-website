@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Ice Cream</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🍧 Order Your Ice Cream</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <section class="form-section">
+    <h2>Fill Your Details 🍦</h2>
+    <form id="orderForm">
+      <label>Name:</label><br>
+      <input type="text" id="name" required><br><br>
+
+      <label>Address:</label><br>
+      <textarea id="address" required></textarea><br><br>
+
+      <label>Quantity:</label><br>
+      <input type="number" id="quantity" min="1" value="1" required><br><br>
+
+      <label>Selected Ice Cream:</label><br>
+      <input type="text" id="icecream" readonly><br><br>
+
+      <button type="submit">Place Order</button>
+    </form>
+
+    <p id="message"></p>
+  </section>
+
+  <script>
+    // get selected item from URL
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById("icecream").value = params.get("item");
+
+    // on form submit
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const icecream = document.getElementById("icecream").value;
+      document.getElementById("message").innerText =
+        `🎉 Thank you ${name}! Your ${icecream} will be delivered soon.`;
+      this.reset();
+    });
+  </script>
+</body>
+</html>
